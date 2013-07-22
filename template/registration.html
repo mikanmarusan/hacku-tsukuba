@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>YConnect Sample</title>
+<!-- Twitter Bootstrap -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+<style type="text/css">
+<!--
+body {
+	position: relative;
+	background-color: white;
+}
+.header {
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 60px;
+	padding-bottom: 20px;
+}
+.navbar-inner {
+  min-height: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #fafafa;
+  background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+  background-repeat: repeat-x;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+.image-panel {
+	text-align: center;
+	vertical-align: middle;
+}
+.footer {
+	text-align: center;
+	vertical-align: middle;
+  padding: 30px;
+}
+.button {
+	text-align: center;
+	vertical-align: middle;
+}
+.login-icon {
+  padding-top: 10px;
+}
+-->
+</style>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <span class="ico:spar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </a>
+    <a class="brand" href="/">YConnect</a>
+    <div class="nav-collapse">
+    <ul class="nav">
+    </ul>
+    <ul class="nav pull-right">
+    <li class="active"><a href="/">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">設定 <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+    <li><a href="#">設定</a></li>
+    <li><a href="#">ログアウト</a></li>
+    </ul>
+    </li>
+    </ul>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<header class="header">
+
+<div class="row">
+  <div class="span3"></div>
+  <div class="span6">
+    <div class="well">
+      <h3>新規登録情報</h3>
+    </div>
+    <div class="span3"></div>
+  </div>
+</div>
+
+</header>
+
+<div class="row">
+
+  <div class="span3"></div>
+  <!-- main -->
+  <div class="span6">
+
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label">アカウント名</label>
+          <div class="controls"><input class="span3" type="text" value="{{account}}" placeholder="爆速太郎"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">姓（漢字）</label>
+          <div class="controls"><input class="span3" type="text" value="{{lastname}}" placeholder="爆速"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">名（漢字）</label>
+          <div class="controls"><input class="span3" type="text" value="{{firstname}}" placeholder="太郎"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">姓（フリガナ）</label>
+          <div class="controls"><input class="span3" type="text" value="{{lastname_kana}}" placeholder="バクソク"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">名（フリガナ）</label>
+          <div class="controls"><input class="span3" type="text" value="{{firstname_kana}}" placeholder="タロウ"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">性別</label>
+          <div class="controls">
+					  {% if sex == "male" %}
+            <input type="radio" name="sex" value="male" checked="checked">　男性
+            <input type="radio" name="sex" value="female">　女性
+					  {% else %}
+            <input type="radio" name="sex" value="male" >　男性
+            <input type="radio" name="sex" value="female" checked="checked">　女性
+						{% endif %}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">生年</label>
+          <div class="controls"><input class="span3" type="email" value="{{birthyear}}" placeholder="1980"></div>
+        </div>
+        <div class="control-group">
+                    <label class="control-label">メールアドレス</label>
+          <div class="controls"><input class="span3" type="email" value="{{email}}" placeholder="bakusoku@sample.com"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">郵便番号</label>
+          <div class="controls"><input class="span3" type="text" value="{{zip}}" placeholder="123-4567"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">都道府県</label>
+          <div class="controls"><input class="span3" type="text" value="{{state}}" placeholder="東京都"></div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">市区町村</label>
+          <div class="controls"><input class="span3" type="text" value="{{city}}" placeholder="港区"></div>
+        </div>
+      </form>
+      <div class="button">
+        <div class="form-actions">
+          <button type="submit" class="btn">　　登録　　</button>
+          <button type="submit" class="btn">キャンセル</button>
+        </div>
+      </div>
+
+  </div>
+  <!-- main end -->
+  <div class="span3"></div>
+ 
+</div>
+<!-- row end -->
+
+</div>
+
+<!-- Twitter Bootstrap -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+
+</body>
+</html>
+
